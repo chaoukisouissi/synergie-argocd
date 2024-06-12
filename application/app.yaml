@@ -17,7 +17,7 @@ spec:
     command:
     - sh
     - -c
-    - "echo '192.168.1.1 renoir.axyus.com' >> /etc/hosts"
+    - "cat /tmp/hosts >> /etc/hosts"
     volumeMounts:
     - name: hosts
       mountPath: /tmp/hosts
