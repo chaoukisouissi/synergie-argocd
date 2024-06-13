@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etc-hosts
+  namespace: etc-hosts
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: etc-hosts
+  template:
+    metadata:
+      labels:
+        app: etc-hosts
+    spec:
+      hostAliases:
+      - ip: "192.168.1.1"
+        hostnames:
+        - "renoir.axyus.com"
+      containers:
+      - name: app-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+

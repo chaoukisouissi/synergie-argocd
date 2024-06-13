@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cm-etc-hosts
+  namespace: etc-hosts
 data:
   hosts: |
     192.168.1.1 renoir.axyus.com
@@ -10,6 +11,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: moninginx
+  namespace: etc-hosts
 spec:
   initContainers:
   - name: modif-hosts
@@ -20,8 +22,7 @@ spec:
     - "cat /tmp/hosts >> /etc/hosts"
     volumeMounts:
     - name: hosts
-      mountPath: /tmp/hosts
-      subPath: hosts
+      mountPath: /tmp
   containers:
   - name: moninginx
     image: nginx
